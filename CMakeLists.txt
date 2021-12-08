@@ -148,30 +148,14 @@ if (NOT DEFINED wxLua_LUA_LIBRARY_USE_BUILTIN)
     set(wxLua_LUA_LIBRARY_USE_BUILTIN TRUE)
 endif()
 set(wxLua_LUA_LIBRARY_USE_BUILTIN ${wxLua_LUA_LIBRARY_USE_BUILTIN} CACHE BOOL
-    "Use the built-in Lua 5.1 or 5.2 library, else specify an external or try to find a system Lua library, see wxLua_LUA_INCLUDE_DIR and wxLua_LUA_LIBRARY" FORCE)
+    "Use the built-in Lua 5.4 library, else specify an external or try to find a system Lua library, see wxLua_LUA_INCLUDE_DIR and wxLua_LUA_LIBRARY" FORCE)
 
 if (NOT DEFINED wxLua_LUA_LIBRARY_VERSION)
-    set(wxLua_LUA_LIBRARY_VERSION "5.1")
-endif()
-set(wxLua_LUA_LIBRARY_VERSION ${wxLua_LUA_LIBRARY_VERSION} CACHE STRING
-    "Choose the Lua library version to use, '5.1' or '5.2', see also wxLua_LUA_LIBRARY_USE_BUILTIN" FORCE)
-
-if ((NOT "${wxLua_LUA_LIBRARY_VERSION}" STREQUAL "5.1") AND (NOT "${wxLua_LUA_LIBRARY_VERSION}" STREQUAL "5.2") AND (NOT "${wxLua_LUA_LIBRARY_VERSION}" STREQUAL "5.3") AND (NOT "${wxLua_LUA_LIBRARY_VERSION}" STREQUAL "5.4"))
-    MESSAGE(FATAL_ERROR "wxLua_LUA_LIBRARY_VERSION may only be set to '5.1' or '5.2' or '5.3' or '5.4'")
+    set(wxLua_LUA_LIBRARY_VERSION "5.4")
 endif()
 
-if (${wxLua_LUA_LIBRARY_VERSION} VERSION_EQUAL 5.1)
-    set(wxLua_LUA_LIBRARY_VERSION_NUM 51)
-else()
-    if (${wxLua_LUA_LIBRARY_VERSION} VERSION_EQUAL 5.2)
-        set(wxLua_LUA_LIBRARY_VERSION_NUM 52)
-    else()
-        if (${wxLua_LUA_LIBRARY_VERSION} VERSION_EQUAL 5.3)
-            set(wxLua_LUA_LIBRARY_VERSION_NUM 53)
-        else()
-            set(wxLua_LUA_LIBRARY_VERSION_NUM 54)
-        endif()
-    endif()
+if (${wxLua_LUA_LIBRARY_VERSION} VERSION_EQUAL 5.4)
+    set(wxLua_LUA_LIBRARY_VERSION_NUM 54)
 endif()
 
 if (NOT DEFINED wxLua_LUA_INCLUDE_DIR)
@@ -181,12 +165,6 @@ if (NOT DEFINED wxLua_LUA_LIBRARY)
     set(wxLua_LUA_LIBRARY )
 endif()
 
-if (${wxLua_LUA_LIBRARY_VERSION} VERSION_EQUAL 5.2)
-    set(wxLua_CXX_DEFINITIONS ${wxLua_CXX_DEFINITIONS} -DLUA_COMPAT_ALL) # Match build used in default 5.2 Makefile
-endif()
-if (${wxLua_LUA_LIBRARY_VERSION} VERSION_EQUAL 5.3)
-    set(wxLua_CXX_DEFINITIONS ${wxLua_CXX_DEFINITIONS} -DLUA_COMPAT_5_2) # Match build used in default 5.3 Makefile
-endif()
 if (${wxLua_LUA_LIBRARY_VERSION} VERSION_EQUAL 5.4)
     set(wxLua_CXX_DEFINITIONS ${wxLua_CXX_DEFINITIONS} -DLUA_COMPAT_5_3) # Match build used in default 5.4 Makefile
 endif()
@@ -199,14 +177,8 @@ if (NOT wxLua_LUA_LIBRARY_USE_BUILTIN)
     if (NOT EXISTS "${wxLua_LUA_LIBRARY}") # OR (NOT EXISTS "${wxLua_LUA_INCLUDE_DIR}"))
         message(STATUS "* wxLua attempting to automatically find an external Lua ${wxLua_LUA_LIBRARY_VERSION} library.")
 
-        if (${wxLua_LUA_LIBRARY_VERSION} VERSION_EQUAL 5.1)
-            FIND_PACKAGE(Lua51)
-        else()
-            if (${wxLua_LUA_LIBRARY_VERSION} VERSION_EQUAL 5.2)
-                FIND_PACKAGE(Lua52)
-            else()
-                FIND_PACKAGE(Lua53)
-            endif()
+        if (${wxLua_LUA_LIBRARY_VERSION} VERSION_EQUAL 5.4)
+            FIND_PACKAGE(Lua54)
         endif()
 
         if (LUA51_FOUND OR LUA52_FOUND OR LUA53_FOUND)
@@ -240,12 +212,8 @@ else() # Use the built-in Lua library
 
     message(STATUS "* wxLua using built-in Lua ${wxLua_LUA_LIBRARY_VERSION} library")
 
-    if (${wxLua_LUA_LIBRARY_VERSION} VERSION_EQUAL 5.1)
-        set(wxLua_LUA_ROOT_DIR "${wxLua_ROOT_DIR}/modules/lua-5.1")
-    else()
-        if (${wxLua_LUA_LIBRARY_VERSION} VERSION_EQUAL 5.2)
-            set(wxLua_LUA_ROOT_DIR "${wxLua_ROOT_DIR}/modules/lua-5.2")
-        endif()
+    if (${wxLua_LUA_LIBRARY_VERSION} VERSION_EQUAL 5.4)
+        set(wxLua_LUA_ROOT_DIR "${wxLua_ROOT_DIR}/modules/lua-5.4.3")
     endif()
 
     set(wxLua_LUA_INCLUDE_DIR "${wxLua_LUA_ROOT_DIR}/src")
@@ -311,7 +279,7 @@ SET(WXLUA_APP_INSTALL_FLAGS
 # ===========================================================================
 
 if (WIN32)
-    set(wxLua_proxydlls_to_not_copy "lua51.dll" "lua5.1.dll" "lua52.dll" "lua5.2.dll" "lua53.dll" "lua5.3.dll")
+    set(wxLua_proxydlls_to_not_copy "lua54.dll" "lua5.4.dll")
 
     if (IS_64_BIT)
         message(STATUS "* Not copying the Lua proxydlls since they do not work in the 64-bit build.")
@@ -327,16 +295,6 @@ if (WIN32)
                                                         ${wxLua_ROOT_DIR}/modules/luaproxydll
                                                         ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}
                                                         COPYONLY)
-
-            if (${wxLua_LUA_LIBRARY_VERSION} VERSION_EQUAL 5.1)
-                set(wxLua_proxydlls_to_not_copy "lua52.dll" "lua5.2.dll" "lua53.dll" "lua5.3.dll")
-            else()
-                if (${wxLua_LUA_LIBRARY_VERSION} VERSION_EQUAL 5.2)
-                    set(wxLua_proxydlls_to_not_copy "lua51.dll" "lua5.1.dll" "lua53.dll" "lua5.3.dll")
-                else()
-                    set(wxLua_proxydlls_to_not_copy "lua51.dll" "lua5.1.dll" "lua52.dll" "lua5.2.dll")
-                endif()
-            endif()
         endif()
     endif (IS_64_BIT)
 

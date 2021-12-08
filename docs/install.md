@@ -670,7 +670,7 @@ specify these variables as : `cmake -DBUILD_SHARED_LIBS=TRUE ...`
 -   wxLua_LUA_LIBRARY_USE_BUILTIN=[TRUE, FALSE]
     -   Use either the built-in Lua library, choose 5.1 or 5.2 and shared or static.
     -   Or an external Lua library, set include dir and library to link to.
--   wxLua_LUA_LIBRARY_VERSION=[5.1, 5.2]
+-   wxLua_LUA_LIBRARY_VERSION=[5.4]
     -   When building the built-in Lua library, specify either the 5.1 or 5.2 version.
 
 -   wxStEdit_COPY_SETUP0_TO_SETUP_H=[TRUE, FALSE]

@@ -64,26 +64,11 @@ elseif ("${CMAKE_GENERATOR}" MATCHES "MinGW Makefiles")
     set(LUA_LINK_LIBRARIES m)
 
 elseif (APPLE)
-    # Lua 5.1 Makefile : $(MAKE) all MYCFLAGS="-DLUA_USE_LINUX" MYLIBS="-lreadline"
-    # Lua 5.2 Makefile : $(MAKE) $(ALL) SYSCFLAGS="-DLUA_USE_MACOSX" SYSLIBS="-lreadline"
-
-    if (${wxLua_LUA_LIBRARY_VERSION} VERSION_EQUAL 5.2)
-        add_definitions( -DLUA_USE_MACOSX ) # is the same as LUA_USE_LINUX in 5.2.2 (at least)
-    else()
-        add_definitions( -DLUA_USE_LINUX ) # adds readline so which make the lua exe a little nicer.
-    endif()
-
+    add_definitions( -DLUA_USE_MACOSX )
     set(LUA_LINK_LIBRARIES m readline)
-
 else () # UNIX
-    # Lua 5.1 Makefile : $(MAKE) all MYCFLAGS="-DLUA_USE_LINUX -fPIC" MYLIBS="-fPIC -Wl,-E -ldl -lreadline -lhistory -lncurses"
-    # Lua 5.2 Makefile : $(MAKE) $(ALL) SYSCFLAGS="-DLUA_USE_LINUX" SYSLIBS="-Wl,-E -ldl -lreadline"
-    #                    CFLAGS= -O2 -Wall -DLUA_COMPAT_ALL $(SYSCFLAGS) $(MYCFLAGS)
-    #                    LDFLAGS= $(SYSLDFLAGS) $(MYLDFLAGS)
-
     add_definitions( -DLUA_USE_LINUX )
     set(LUA_LINK_LIBRARIES m dl readline history ncurses)
-
 endif()
 
 # ---------------------------------------------------------------------------
@@ -193,10 +178,6 @@ else()
     set(LuaLib_OBJECTS ${LuaLib_OBJECT_FILES})
     set_source_files_properties(${LuaLib_OBJECTS} PROPERTIES GENERATED TRUE)
     set(LUAC_SOURCES ${LuaLib_OBJECTS})
-endif()
-
-if (${wxLua_LUA_LIBRARY_VERSION} VERSION_EQUAL 5.1)
-    set( luac_EXTRA_SOURCES "src/print.c" )
 endif()
 
 ADD_EXECUTABLE_FULL( luac ALLOW_MISSING_FILES
@@ -615,11 +596,7 @@ endfunction (wxLua_Modules_LuaModule_TARGETS)
 # ===========================================================================
 
 if (wxLua_LUA_LIBRARY_USE_BUILTIN)
-    if (${wxLua_LUA_LIBRARY_VERSION} VERSION_EQUAL 5.1)
-        add_subdirectory( lua-5.1 )
-    else()
-        add_subdirectory( lua-5.2 )
-    endif()
+    add_subdirectory( lua-5.4 )
 endif()
 
 add_subdirectory( wxbind )

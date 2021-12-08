@@ -91,7 +91,7 @@ cleanlib:
               $(WXLUA_TARGET_LIBDIR)/$(WXLUA_TARGET_LIB_LINK2)
 
 cleanall:
-	@(cd $(WXLUA_DIR)/modules/lua-5.1        && $(MAKE) clean)
+	@(cd $(WXLUA_DIR)/modules/lua-5.4.3      && $(MAKE) clean)
 	@(cd $(WXLUA_DIR)/modules/wxlua          && $(MAKE) clean)
 	@(cd $(WXLUA_DIR)/modules/wxlua/debug    && $(MAKE) clean)
 	@(cd $(WXLUA_DIR)/modules/wxlua/debugger && $(MAKE) clean)
