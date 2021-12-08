@@ -2,10 +2,10 @@
 
 REM -------------------------------------------------------------------
 REM This is a build file to automatically generate the distribution
-REM zip files using MSVC 2008 32-bit.
-REM It builds wxWidgets 2.8 unicode and ansi and Lua 5.1 and 5.2.
+REM zip files using MSVC 2019 64-bit.
+REM It builds wxWidgets 3.1.5 unicode and ansi and Lua 5.4.
 REM
-REM USAGE: create-msvc2008-distrib.bat c:\path\to\wxWidgets-2.8 
+REM USAGE: create-release.bat D:\GNU\wxWidgets
 REM -------------------------------------------------------------------
 
 setlocal enabledelayedexpansion
@@ -17,12 +17,9 @@ set BUILDDIRS=
 set ERRCOUNT=0
 set ERRDIRS=
 
-IF "%VCINSTALLDIR%"=="" call "c:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\bin\vcvars32.bat"
+IF "%VCINSTALLDIR%"=="" call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Auxiliary\Build\vcvars64.bat"
 
-call:MakeDist build-wx30-lua51  wxLua-3.0.0.1-Lua-5.1.5-MSW-Ansi    msw  3.0 5.1
-call:MakeDist build-wx30-lua52  wxLua-3.0.0.1-Lua-5.2.3-MSW-Ansi    msw  3.0 5.2
-call:MakeDist build-wx30u-lua51 wxLua-3.0.0.1-Lua-5.1.5-MSW-Unicode mswu 3.0 5.1
-call:MakeDist build-wx30u-lua52 wxLua-3.0.0.1-Lua-5.2.3-MSW-Unicode mswu 3.0 5.2
+call:MakeDist build-wx31u-lua54 wxLua-3.0.1-Lua-5.4-MSW-Unicode mswu 3.1.5 5.4
 
 echo.
 echo Build dirs : !BUILDDIRS!
@@ -57,7 +54,7 @@ REM Function to call cmake to generate the appropriate files
 
     REM EXIT /B
 
-    devenv %BUILD_DIR%\wxLua.sln  /Build "MinSizeRel|Win32"
+    devenv %BUILD_DIR%\wxLua.sln  /Build "Release|x64"
 
     set /a ERRCOUNT=!ERRCOUNT! + !ERRORLEVEL!   
     if !ERRORLEVEL! NEQ 0 (
@@ -67,7 +64,7 @@ REM Function to call cmake to generate the appropriate files
     REM Remove any old junk that may be in the install dir
     rmdir /S /Q %BUILD_DIR%\install
 
-    devenv %BUILD_DIR%\wxLua.sln  /Build "MinSizeRel|Win32" /project INSTALL
+    devenv %BUILD_DIR%\wxLua.sln  /Build "Release|x64" /project INSTALL
 
     REM These aren't intersting for the binary users
     rmdir /S /Q %BUILD_DIR%\install\include
@@ -78,7 +75,7 @@ REM Function to call cmake to generate the appropriate files
         rmdir /S /Q %DIST_NAME%
         del   /S /Q %DIST_NAME%.zip
         rename install %DIST_NAME%
-        c:\cygwin\bin\zip -r %DIST_NAME%.zip %DIST_NAME%
+        zip -r %DIST_NAME%.zip %DIST_NAME%
         move /Y %DIST_NAME%.zip ..\
     popd
 

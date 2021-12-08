@@ -7,17 +7,14 @@
 
 project( wxLua )
 
-set(wxLua_ROOT_DIR ${CMAKE_CURRENT_SOURCE_DIR} CACHE PATH
-    "Root dir of wxLua" FORCE)
+set(wxLua_ROOT_DIR ${CMAKE_CURRENT_SOURCE_DIR} CACHE PATH "Root dir of wxLua" FORCE)
 
 # ===========================================================================
 # General settings for CMake
 # ===========================================================================
 
 # ---------------------------------------------------------------------------
-# Use a minimum version of CMake of 2.8, >= 2.8.3 is prefered
-
-cmake_minimum_required( VERSION 2.8 )
+cmake_minimum_required( VERSION 3.12.0 )
 
 # ---------------------------------------------------------------------------
 # Setup the CMake environment
@@ -29,10 +26,10 @@ include( build/CMakewxAppLib.cmake )
 # wxLua version
 # ===========================================================================
 
-set( wxLua_VERSION           "3.1.0.0" )
+set( wxLua_VERSION           "3.0.1" )
 set( wxLua_MAJOR_VERSION     "3" )
-set( wxLua_MINOR_VERSION     "1" )
-set( wxLua_RELEASE_VERSION   "0" )
+set( wxLua_MINOR_VERSION     "0" )
+set( wxLua_RELEASE_VERSION   "1" )
 set( wxLua_SUBRELEASE_NUMBER "0")
 
 # ===========================================================================
@@ -147,9 +144,6 @@ endmacro()
 if (NOT DEFINED wxLua_LUA_LIBRARY_USE_BUILTIN)
     set(wxLua_LUA_LIBRARY_USE_BUILTIN TRUE)
 endif()
-set(wxLua_LUA_LIBRARY_USE_BUILTIN ${wxLua_LUA_LIBRARY_USE_BUILTIN} CACHE BOOL
-    "Use the built-in Lua 5.4 library, else specify an external or try to find a system Lua library, see wxLua_LUA_INCLUDE_DIR and wxLua_LUA_LIBRARY" FORCE)
-
 if (NOT DEFINED wxLua_LUA_LIBRARY_VERSION)
     set(wxLua_LUA_LIBRARY_VERSION "5.4")
 endif()
@@ -332,6 +326,7 @@ ADD_DOXYGEN( wxLua_doxygen
 SETUP_wxLua() # all libraries are built with these settings
 
 include_directories(${wxLuaBind_WXLUASETUP_DIR})
+include_directories("${wxWidgets_ROOT_DIR}/include")
 
 if (NOT TARGET wxLuaLib)
     add_subdirectory( modules/ )
@@ -462,7 +457,6 @@ install(FILES
         DESTINATION "${WXLUA_SHARE_DIR}apps/wxluacan")
 
 install(FILES
-        ${wxLua_ROOT_DIR}/apps/wxluafreeze/readme.txt
         ${wxLua_ROOT_DIR}/apps/wxluafreeze/wxluafreeze.lua
         DESTINATION "${WXLUA_SHARE_DIR}apps/wxluafreeze")
 
@@ -474,7 +468,6 @@ SET(CPACK_GENERATOR "ZIP")
 
 SET(CPACK_PACKAGE_DESCRIPTION_SUMMARY "wxLua")
 SET(CPACK_PACKAGE_VENDOR              "John Labenski")
-SET(CPACK_PACKAGE_DESCRIPTION_FILE    "${CMAKE_CURRENT_SOURCE_DIR}/docs/readme.txt")
 SET(CPACK_RESOURCE_FILE_LICENSE       "${CMAKE_CURRENT_SOURCE_DIR}/docs/licence.txt")
 SET(CPACK_PACKAGE_VERSION_MAJOR       "${wxLua_MAJOR_VERSION}")
 SET(CPACK_PACKAGE_VERSION_MINOR       "${wxLua_MINOR_VERSION}")

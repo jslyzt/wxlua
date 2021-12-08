@@ -38,7 +38,7 @@
 //
 // Simply copy the staticly linked lua.exe with the newly created lua51.dll
 // and use as if you had a dynamicly linked lua.exe to a legitimate lua51.dll library. 
-// You can also copy the lua51.dll to lua5.1.dll or whatever other name you require.
+// You can also copy the lua51.dll to lua5.4.dll or whatever other name you require.
 // The main benefit of using the proxy lib over other methods is that you can use 
 // multiple precompiled 3rd party libs that all may require differenly named lua51.dlls, 
 // but they'll all work.

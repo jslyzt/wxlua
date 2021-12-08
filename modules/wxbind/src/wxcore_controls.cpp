@@ -6207,7 +6207,6 @@ int wxCALLBACK wxLua_ListCompareFunction(wxIntPtr item1, wxIntPtr item2, wxIntPt
     LCF_data->wxlState->LuaPCall(3, 1);
 
     // for some bizarre reason lua converts the return to a string! try to get it back as a number
-    // Happens with lua 5.1.2
     int ret = (int)lua_tonumber(L, -1); //LCF_data->wxlState->GetNumberType(0);
     lua_settop(L, old_top); // pop results
 

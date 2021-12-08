@@ -30,7 +30,7 @@ extern "C"
         #define luaL_getn luaL_len
         #define LUA_GLOBALSINDEX LUA_RIDX_GLOBALS
 
-        // For compatiblity with Lua 5.1 and 5.2, wxLua needs the luaL_openlib() function.
+        // For compatiblity with Lua 5.4, wxLua needs the luaL_openlib() function.
         // The function is compiled into the Lua library when -DLUA_COMPAT_MODULE is defined
         // when building the Lua library.
         // If you get a unresolved symbol luaL_openlib linker error, you need to rebuild your

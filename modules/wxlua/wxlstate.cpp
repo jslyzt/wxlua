@@ -33,7 +33,7 @@ extern "C"
     int luaopen_bit(lua_State *L);
 
 #if (LUA_VERSION_NUM < 502)
-    // provided by lbitlib.c for 5.1 or we use the one in 5.2 or LuaJIT.
+    // provided by lbitlib.c for 5.4 or we use the one in 5.2 or LuaJIT.
     int luaopen_bit32 (lua_State *L);
 #endif // (LUA_VERSION_NUM < 502)
 }
@@ -2058,7 +2058,7 @@ void wxLuaState::lua_SetHook(lua_Hook func, int mask, int count)
 {
     wxCHECK_RET(Ok(), wxT("Invalid wxLuaState"));
     lua_sethook(M_WXLSTATEDATA->m_lua_State, func, mask, count);
-    // lua_sethook returns 1 for lua 5.1 & 5.2
+    // lua_sethook returns 1 for lua 5.4
     // lua_sethook is void in 5.3+
 }
 

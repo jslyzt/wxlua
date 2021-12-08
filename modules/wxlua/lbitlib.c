@@ -1,6 +1,6 @@
 /*
  * This is the bit32 library from lua 5.2.0, backported to
- * lua 5.1.4.
+ * lua 5.4.
  *
  * http://smbolton.com/lua/lbitlib-5.2.0-backport4.c
  * version 5.2.0-backport4
@@ -42,7 +42,7 @@
 
 #define LUA_BITLIBNAME	"bit32"
 
-/* ----- adapted from lua-5.2.0 luaconf.h: ----- */
+/* ----- adapted from lua-5.4.3 luaconf.h: ----- */
 
 /*
 @@ LUA_UNSIGNED is the integral type used by lua_pushunsigned/lua_tounsigned.
@@ -89,12 +89,12 @@
 
 #endif                  /* } */
 
-/* ----- from lua-5.2.0 lua.h: ----- */
+/* ----- from lua-5.4.3 lua.h: ----- */
 
 /* unsigned integer type */
 typedef LUA_UNSIGNED lua_Unsigned;
 
-/* ----- adapted from lua-5.2.0 llimits.h: ----- */
+/* ----- adapted from lua-5.4.3 llimits.h: ----- */
 
 /* lua_number2unsigned is a macro to convert a lua_Number to a lua_Unsigned.
 ** lua_unsigned2number is a macro to convert a lua_Unsigned to a lua_Number.
@@ -146,7 +146,7 @@ union luai_Cast2 { double l_d; LUAI_INT32 l_p[2]; };
 #define lua_unsigned2number(u)  \
     (((u) <= (lua_Unsigned)INT_MAX) ? (lua_Number)(int)(u) : (lua_Number)(u))
 
-/* ----- adapted from lua-5.2.0 lapi.c: ----- */
+/* ----- adapted from lua-5.4.3 lapi.c: ----- */
 
 static void lua_pushunsigned (lua_State *L, lua_Unsigned u) {
   lua_Number n;
@@ -154,7 +154,7 @@ static void lua_pushunsigned (lua_State *L, lua_Unsigned u) {
   lua_pushnumber(L, n);
 }
 
-/* ----- adapted from lua-5.2.0-work3 lbitlib.c getuintarg(): ----- */
+/* ----- adapted from lua-5.4.3-work3 lbitlib.c getuintarg(): ----- */
 
 static lua_Unsigned luaL_checkunsigned (lua_State *L, int arg) {
   lua_Unsigned r;

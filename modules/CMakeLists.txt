@@ -72,39 +72,7 @@ else () # UNIX
 endif()
 
 # ---------------------------------------------------------------------------
-
-set( LuaLib_ADD_LIBRARY_FULL_FILES_51
-        src/lapi.c
-        src/lcode.c
-        src/ldebug.c
-        src/ldo.c
-        src/ldump.c
-        src/lfunc.c
-        src/lgc.c
-        src/llex.c
-        src/lmem.c
-        src/lobject.c
-        src/lopcodes.c
-        src/lparser.c
-        src/lstate.c
-        src/lstring.c
-        src/ltable.c
-        src/ltm.c
-        src/lundump.c
-        src/lvm.c
-        src/lzio.c
-        src/lauxlib.c
-        src/lbaselib.c
-        src/ldblib.c
-        src/liolib.c
-        src/lmathlib.c
-        src/loslib.c
-        src/ltablib.c
-        src/lstrlib.c
-        src/loadlib.c
-        src/linit.c )
-
-set( LuaLib_ADD_LIBRARY_FULL_FILES_52
+set( LuaLib_ADD_LIBRARY_FULL_FILES_54
         src/lapi.c
         src/lcode.c
         src/lctype.c
@@ -127,17 +95,16 @@ set( LuaLib_ADD_LIBRARY_FULL_FILES_52
         src/lzio.c
         src/lauxlib.c
         src/lbaselib.c
-        src/lbitlib.c
         src/lcorolib.c
         src/ldblib.c
         src/liolib.c
         src/lmathlib.c
         src/loslib.c
-        src/ltablib.c
         src/lstrlib.c
         src/ltablib.c
         src/loadlib.c
-        src/linit.c )
+        src/linit.c
+        src/lutf8lib.c)
 
 # ---------------------------------------------------------------------------
 
@@ -202,7 +169,7 @@ ADD_EXECUTABLE_FULL( lua
     HEADERS
     SOURCES
         src/lua.c
-        "${wxLua_ROOT_DIR}/modules/lua-5.2/lua.rc"
+        "${wxLua_ROOT_DIR}/modules/lua-5.4.3/lua.rc"
     LINK_LIBRARIES
         LuaLib
         ${LUA_LINK_LIBRARIES}
@@ -258,7 +225,7 @@ else()
         HEADERS
         SOURCES
             src/lua.c
-            "${wxLua_ROOT_DIR}/modules/lua-5.2/lua.rc"
+            "${wxLua_ROOT_DIR}/modules/lua-5.4.3/lua.rc"
         LINK_LIBRARIES
             LuaLibShared
             ${LUA_LINK_LIBRARIES}
@@ -596,7 +563,7 @@ endfunction (wxLua_Modules_LuaModule_TARGETS)
 # ===========================================================================
 
 if (wxLua_LUA_LIBRARY_USE_BUILTIN)
-    add_subdirectory( lua-5.4 )
+    add_subdirectory( lua-5.4.3 )
 endif()
 
 add_subdirectory( wxbind )

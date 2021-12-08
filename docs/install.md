@@ -457,10 +457,8 @@ simply build them all.
 
 ### 3.2 - wxLua libraries
 
--   `wxLua/modules/lua-5.1`
-    -   Lua 5.1.x sources with patches applied.
--   `wxLua/modules/lua-5.2`
-    -   Lua 5.2.x sources with patches applied.
+-   `wxLua/modules/lua-5.4`
+    -   Lua 5.4.x sources with patches applied.
 -   `wxLua/modules/luamodule`
     -   A shared library (wx.so or wx.dll) for Lua code to call `require("wx")` to
         load the wxLua bindings.

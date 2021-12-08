@@ -1,5 +1,5 @@
 /*
-** Lua BitOp -- a bit operations library for Lua 5.1/5.2.
+** Lua BitOp -- a bit operations library for Lua 5.4.
 ** http://bitop.luajit.org/
 **
 ** Copyright (C) 2008-2012 Mike Pall. All rights reserved.

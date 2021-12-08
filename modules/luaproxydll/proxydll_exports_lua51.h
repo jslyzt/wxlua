@@ -2,7 +2,7 @@
 // File generated using pexports.exe 0.44-1 from MinGW
 // The function SYMBOL() has been placed around each function name.
 
-//LIBRARY lua5.1.dll
+//LIBRARY lua5.4.dll
 //EXPORTS
 */
 SYMBOL(luaL_addlstring)

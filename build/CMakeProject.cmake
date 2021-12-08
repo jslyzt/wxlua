@@ -99,10 +99,6 @@ if (UNIX)
             "${CMAKE_EDIT_COMMAND2} \"${CMAKE_HOME_DIRECTORY}\" &\n" )
         execute_process(COMMAND chmod a+x ${CMAKE_BINARY_DIR}/cmake-gui.sh)
     endif()
-else()
-    file(WRITE "${CMAKE_BINARY_DIR}/cmake-gui.bat"
-         "cd /D \"${CMAKE_BINARY_DIR}\"\n"
-         "start \"Title\" \"${CMAKE_EDIT_COMMAND}\" \"${CMAKE_HOME_DIRECTORY}\"\n" )
 endif()
 
 # ===========================================================================

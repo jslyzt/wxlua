@@ -10,7 +10,7 @@
 # Some targets that we may like to build
 
 Lua:
-	@(cd $(WXLUA_DIR)/modules/lua-5.1 && $(MAKE) $(LUA_PLAT))
+	@(cd $(WXLUA_DIR)/modules/lua-5.4.3 && $(MAKE) $(LUA_PLAT))
 
 wxLuaLib:
 	@(cd $(WXLUA_DIR)/modules/wxlua && $(MAKE))

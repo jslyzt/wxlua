@@ -64,41 +64,6 @@ endif()
 # Display to the user what the options are that may be passed to CMake
 # to control the build before we do anything.
 # ===========================================================================
-
-message( STATUS "* ---------------------------------------------------------------------------" )
-message( STATUS "* wxWidgets library settings :")
-message( STATUS "* ")
-message( STATUS "* Note that ONLY an all shared (DLL) or all static build is supported." )
-message( STATUS "*   I.E. If you choose shared you must link to shared wxWidgets libs." )
-message( STATUS "*   Set -DBUILD_SHARED_LIBS=[TRUE, FALSE] to control shared/static lib.")
-message( STATUS "* ")
-message( STATUS "* Finding wxWidgets for MSW and MSVC")
-message( STATUS "* -DwxWidgets_ROOT_DIR=[path] : (e.g. /path/to/wxWidgets/)")
-message( STATUS "*   Path to the root of the wxWidgets build, must at least set this." )
-message( STATUS "* -DwxWidgets_LIB_DIR=[path] : (e.g. /path/to/wxWidgets/lib/vc_lib/)")
-message( STATUS "*   Path to the wxWidgets lib dir also set this if libs can't be found." )
-message( STATUS "* -DwxWidgets_CONFIGURATION=[configuration] : ")
-message( STATUS "*   Set wxWidgets configuration; e.g. msw, mswu, mswunivu..." )
-message( STATUS "*   Where 'u' = unicode and 'd' = debug." )
-message( STATUS "*   MSVC GUI : You need only choose msw, mswu, mswuniv, mswunivu since " )
-message( STATUS "*              release or debug mode is chosen in the GUI." )
-message( STATUS "* -DwxWidgets_COMPONENTS=[...stc;html;adv;core;base or mono] : ")
-message( STATUS "*   For non-monolithic builds choose the wxWidgets libs to link to.")
-message( STATUS "*    xrc;xml;gl;net;media;propgrid;richtext;aui;stc;html;adv;core;base")
-message( STATUS "*   For monolithic builds choose mono and the contribs libs.")
-message( STATUS "*    stc;mono")
-message( STATUS "*   The extra decorations, e.g. wxmsw28ud_adv.lib, will be searched for.")
-message( STATUS "*   Libs that cannot be found will be printed below, please fix/remove")
-message( STATUS "*   them to be able to build this project.")
-message( STATUS "*   You will get compilation/linker errors if wxWidgets is not found.")
-message( STATUS "* ")
-message( STATUS "* Finding wxWidgets for GCC and Unix type systems")
-message( STATUS "* -DwxWidgets_CONFIG_EXECUTABLE=[path/to/wx-config] : ")
-message( STATUS "*   Specify path to wx-config script for GCC and Unix type builds" )
-message( STATUS "* ---------------------------------------------------------------------------" )
-message( STATUS " " )
-
-# ---------------------------------------------------------------------------
 # Look for wxWidgets.
 #
 # In MSW set
@@ -222,7 +187,7 @@ macro( FIND_WXWIDGETS wxWidgets_COMPONENTS_)
 
         if (NOT UNIX)
             if (idx_stc GREATER "-1")
-                include_directories("${wxWidgets_ROOT_DIR}/contrib/include")
+                include_directories("${wxWidgets_ROOT_DIR}/include")
             endif()
         endif()
     else()

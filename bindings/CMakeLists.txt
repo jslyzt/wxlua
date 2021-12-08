@@ -12,9 +12,7 @@ project( wxLua_bindings )
 # ===========================================================================
 
 # ---------------------------------------------------------------------------
-# Use a minimum version of CMake of 2.8, >= 2.8.3 is prefered
-
-cmake_minimum_required( VERSION 2.8 )
+cmake_minimum_required( VERSION 3.12.0 )
 
 # ---------------------------------------------------------------------------
 # Setup the CMake environment
